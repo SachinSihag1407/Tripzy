@@ -1,0 +1,161 @@
+# User Registration API Documentation
+
+## Endpoint
+
+**POST** `/register`
+
+Registers a new user in the Tripzy backend.
+
+---
+
+## Request Body
+
+Send a JSON object with the following structure:
+
+```json
+{
+  "fullName": {
+    "firstName": "John",
+    "lastName": "Doe"
+  },
+  "email": "john.doe@example.com",
+  "password": "yourpassword"
+}
+```
+
+### Field Requirements
+
+- `fullName.firstName`: String, **required**, minimum 3 characters
+- `fullName.lastName`: String, optional, minimum 3 characters
+- `email`: String, **required**, must be a valid email
+- `password`: String, **required**, minimum 6 characters
+
+---
+
+## Responses
+
+- **201 Created**
+  - Registration successful. Returns a JSON object with the user and authentication token.
+  - Example:
+    ```json
+    {
+      "token": "jwt_token_here",
+      "user": {
+        "_id": "user_id",
+        "fullName": {
+          "firstName": "John",
+          "lastName": "Doe"
+        },
+        "email": "john.doe@example.com"
+      }
+    }
+    ```
+
+- **400 Bad Request**
+  - Validation failed. Returns an array of error messages.
+  - Example:
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Invalid Email",
+          "param": "email",
+          "location": "body"
+        }
+      ]
+    }
+    ```
+
+---
+
+## Example Request
+
+```json
+curl -X POST http://localhost:5000/register \
+  -H "Content-Type: application/json" \
+  -d '{
+    "fullName": {
+      "firstName": "John",
+      "lastName": "Doe"
+    },
+    "email": "john.doe@example.com",
+    "password":
+```
+ **POST** `/login`
+
+Authenticates an existing user and returns a JWT token.
+
+---
+
+## Request Body
+
+Send a JSON object with the following structure:
+
+```json
+{
+  "email": "john.doe@example.com",
+  "password": "yourpassword"
+}
+```
+
+### Field Requirements
+
+- `email`: String, **required**, must be a valid email
+- `password`: String, **required**, minimum 6 characters
+
+---
+
+
+## Responses
+
+- **200 OK**
+  - Login successful. Returns a JSON object with the user and authentication token.
+  - Example:
+    ```json
+    {
+      "token": "jwt_token_here",
+      "user": {
+        "_id": "user_id",
+        "fullName": {
+          "firstName": "John",
+          "lastName": "Doe"
+        },
+        "email": "john.doe@example.com"
+      }
+    }
+    ```
+
+- **401 Unauthorized**
+  - Login failed due to invalid credentials or validation errors.
+  - Example (validation error):
+    ```json
+    {
+      "errors": [
+        {
+          "msg": "Invalid Email",
+          "param": "email",
+          "location": "body"
+        }
+      ]
+    }
+    ```
+
+ - Example (invalid credentials):
+    ```json
+    {
+      "message": "Invalid user Details"
+    }
+    ```
+
+---
+
+## Example Request
+
+```sh
+curl -X POST http://localhost:5000/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "john.doe@example.com",
+    "password": "yourpassword"
+  }'
+```
