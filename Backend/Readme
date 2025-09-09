@@ -159,3 +159,36 @@ curl -X POST http://localhost:5000/login \
     "password": "yourpassword"
   }'
 ```
+
+  ## User Endpoints
+
+  ### Get User Profile
+  - **URL:** `/users/profile`
+  - **Method:** `GET`
+  - **Authentication:** Required (Bearer Token)
+  - **Description:** Retrieves the profile information of the authenticated user
+  - **Response:**
+    ```json
+    {
+      "success": true,
+      "user": {
+        "id": "user_id",
+        "email": "user@example.com",
+        "name": "User Name"
+        // other user details
+      }
+    }
+    ```
+
+  ### Logout User
+  - **URL:** `/users/logout`
+  - **Method:** `POST`
+  - **Authentication:** Required (Bearer Token)
+  - **Description:** Logs out the currently authenticated user and invalidates their token
+  - **Response:**
+    ```json
+    {
+      "success": true,
+      "message": "Logged out successfully"
+    }
+    ```

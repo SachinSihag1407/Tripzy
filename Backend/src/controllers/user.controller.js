@@ -1,4 +1,4 @@
-import express from "express"
+
 import { User } from "../models/user.model.js"
 import { createUser } from "../services/user.service.js"
 import { cookie, validationResult } from "express-validator"
