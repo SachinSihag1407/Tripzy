@@ -1,4 +1,7 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import { UserDataContext } from '../context/userContext'
 
 const UserSignUp = () => {
 
@@ -8,23 +11,36 @@ const UserSignUp = () => {
   const [lastName, setLastName] = useState('')
   const [userData, setUserData] = useState({})
 
+  const navigate = useNavigate()
 
-  const submitHandler = (e) => {
-    e.prventDefault();
-    setEmail('')
-    setFirstName('')
-    setLastName('')
-    setPassword('')
-    setUserData({
+  // yha user ko set kro 
+  const { user, setUser } = useContext(UserDataContext)
+
+  const submitHandler = async (e) => {
+
+    e.preventDefault();
+
+    const newUser = {
       fullName: {
         firstName: firstName,
         lastName: lastName
       },
       email: email,
       password: password
+    }
 
-    })
+    const response = await axios.post("http://localhost:5001/users/register/", newUser);
+    
+    if (response.status == 201) {
+      const data = response.data
+      setUser(data.user)
+      navigate('/home')
+    }
 
+     setEmail('')
+    setFirstName('')
+    setLastName('')
+    setPassword('')
   }
 
   return (
@@ -34,7 +50,7 @@ const UserSignUp = () => {
 
         <form onSubmit={(e) => { submitHandler(e) }}>
 
-          <h3 className='text-lg font-medium mb-2'>What's your email</h3>
+          <h3 className='text-lg font-medium mb-2'>What's your name</h3>
 
           <div className='flex gap-4 mb-6'>
             <input
@@ -72,7 +88,7 @@ const UserSignUp = () => {
             className='bg-[#eeeeee]  mb-5 rounded px-4 py-2 border w-full text-lg placeholder:text-base'
             type="password" placeholder='password' />
           <button className='bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-base placeholder:text-sm '>
-            Login
+            Create Account
           </button>
         </form>
         <p className='text-center'>Already have a Account? <Link to='/login' className='text-blue-600'>Login here</Link></p>
