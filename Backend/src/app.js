@@ -6,7 +6,10 @@ import captainRouter from "./routers/captain.route.js";
 
 const app = express();
 
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:5173",  // ya "*" try kar ke dekh
+  credentials: true
+}));
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
 app.use(cookieParser())
