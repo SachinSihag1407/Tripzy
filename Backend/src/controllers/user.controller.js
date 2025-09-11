@@ -84,7 +84,7 @@ const logoutUser = async(req,res,next) => {
     // ab isko black list krwa do 
     await BlacklistToken.create({token});
 
-    return res.status(401).json({message : "Logged Out"})
+    return res.status(200).json({message : "Logged Out"})
 
 }
 

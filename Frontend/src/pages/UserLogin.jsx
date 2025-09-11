@@ -24,12 +24,13 @@ const UserLogin = () => {
         }
 
         const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`, userData)
-        
+
         if (response.status == 200) {
             // response se data liya
             const data = response.data;
             // data se user ko le liya
             setUser(data.user)
+            localStorage.setItem('token', data.token)
             // now ab main page pr navigate kkr jao
             navigate('/home')
         }
