@@ -129,6 +129,7 @@ const Home = () => {
       }}
         className='h-screen w-screen '>
         <img className='h-full w-full object-cover' src='https://imgs.search.brave.com/d0X_YC5CTyk2e7Z2I4gVmfhZ5OBQ7iXVkKPJLoa8XqM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9naXRo/dWIuY29tL01pbmRv/cmtzT3BlblNvdXJj/ZS9VYmVyLUNhci1B/bmltYXRpb24tQW5k/cm9pZC9yYXcvbWFz/dGVyL2Fzc2V0cy9o/b3ctdG8tYWRkLXVi/ZXItY2FyLWFuaW1h/dGlvbi1pbi1hbmRy/b2lkLWFwcC1naWYu/Z2lm.gif' alt='' />
+
       </div>
 
       <div className=' flex flex-col justify-end absolute h-screen top-0 w-full'>
@@ -151,12 +152,14 @@ const Home = () => {
             <div className='line absolute h-17 w-1 top-[35%] left-6 bg-gray-900 rounded-full'></div>
 
             <input onClick={() => { setPanelOpen(true) }}
-              value={pickUp} onChange={(e) => setPickUp(e.target.value)}
+              value={pickUp}
+              onChange={(e) => setPickUp(e.target.value)}
               className='bg-[#eee] px-12 py-2 text-base rounded-lg w-full mt-5 '
               type='text' placeholder='Add a pick-up location' />
 
             <input onClick={() => { setPanelOpen(true) }}
-              value={destination} onChange={(e) => setDestination(e.target.value)}
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
               className='bg-[#eee] px-12 py-2 text-base rounded-lg w-full mt-3 '
               type='text' placeholder='Enter your destination' />
 
@@ -185,12 +188,12 @@ const Home = () => {
       <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white  py-6 px-3 pt-12'>
 
         <LookingForDriver setVehicleFound={setVehicleFound} />
- 
+
       </div>
 
-      <div  ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0  bg-white  py-6 px-3 pt-12'>
+      <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0  bg-white  py-6 px-3 pt-12'>
 
-        <WaitingForDriver waitingForDriver={waitingForDriver}  />
+        <WaitingForDriver waitingForDriver={waitingForDriver} />
 
       </div>
 
