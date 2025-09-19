@@ -3,6 +3,8 @@ import cors from "cors"
 import userRouter from "./routers/user.route.js";
 import cookieParser from "cookie-parser"
 import captainRouter from "./routers/captain.route.js";
+import mapRouter from "./routers/maps.routes.js";
+
 
 const app = express();
 
@@ -21,6 +23,7 @@ app.get('/',(req,res)=>{
 
 app.use("/users",userRouter)
 app.use("/captains",captainRouter)
+app.use('/maps',mapRouter)
 
 
 export{app}
