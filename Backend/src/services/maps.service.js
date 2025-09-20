@@ -72,8 +72,8 @@ export const getDistanceTimeService = async (origin, destination) => {
       return {
         distance: `${(element.distance / 1000).toFixed(1)} km`, // meters → km
         duration: hours > 0 ? `${hours} hr ${minutes} min` : `${minutes} min`,
-        distanceValue: `${element.distance} m`,  // meters
-        durationValue: `${element.duration} sec`,  // seconds
+        distanceValue: element.distance,  // meters
+        durationValue: element.duration,  // seconds
       };
 
     } else {
