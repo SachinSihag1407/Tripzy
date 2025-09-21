@@ -36,13 +36,15 @@ const getFare = async (req, res) => {
     if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() })
     }
+    
+    const { pickup, destination } = req.query;
 
     try {
-        const fare = await getFareService(pickup,destination);
+        const fare = await getFareService(pickup, destination);
         return res.status(200).json(fare)
-        
+
     } catch (error) {
-        return res.status(500).json({message:error.message})
+        return res.status(500).json({ message: error.message })
     }
 
     con

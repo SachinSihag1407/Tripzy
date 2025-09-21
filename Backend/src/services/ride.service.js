@@ -10,6 +10,16 @@ async function getFareService(pickup, destination) {
 
     const distanceTime = await getDistanceTimeService(pickup, destination);
 
+    // console.log("📌 DISTANCE TIME:", distanceTime);
+
+    if (!distanceTime) {
+        throw new Error("Could not calculate distance/time from Ola Maps");
+    }
+
+    if (!distanceTime.distanceValue || !distanceTime.durationValue) {
+        throw new Error("Invalid data from Ola Maps response");
+    }
+
     const baseFare = {
         car: 50, motorcycle: 20,
         auto: 30
@@ -60,7 +70,7 @@ export const createRideService = async ({ user, pickup, destination, vehicleType
         user,
         pickup,
         destination,
-        otp : getOtp(6),
+        otp: getOtp(6),
         fare: fare[vehicleType]
 
     })

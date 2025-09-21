@@ -2,7 +2,7 @@ import { Router } from 'express'
 import { createRide } from '../controllers/ride.controller.js';
 import { authUser } from '../middlewares/auth.middleware.js';
 import { body, query } from 'express-validator';
-import getFare from '../services/ride.service.js';
+import { getFare } from '../controllers/ride.controller.js';
 
 const rideRouter = Router();
 
