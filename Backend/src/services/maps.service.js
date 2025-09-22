@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Captain } from '../models/captain.model.js';
 
 // Geocoding using Ola Maps
 export const getAddressCoordinatesService = async (address) => {
@@ -122,4 +123,17 @@ export const getAutoCompleteSuggestionService = async (input) => {
 
   }
 
+}
+
+export const getCaptainInRadius = async (lat, lng, radius) => {
+
+  const captains = await Captain.find({
+    location: {
+      $geoWithin: {
+        $centerShepre: [[ltd, lng], radius / 3963.2]
+      }
+    }
+  });
+
+  return captains;
 }

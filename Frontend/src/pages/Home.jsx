@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import axios from 'axios'
@@ -8,6 +8,9 @@ import VehiclePanel from '../components/VehiclePanel'
 import ConfirmRide from '../components/ConfirmRide'
 import LookingForDriver from '../components/LookingForDriver'
 import WaitingForDriver from '../components/WaitingForDriver'
+import { SocketContext } from '../context/SocketContext'
+import { UserDataContext } from '../context/userContext'
+
 
 const Home = () => {
 
@@ -31,6 +34,16 @@ const Home = () => {
   const confirmRidePanelRef = useRef(null)
   const vehicleFoundRef = useRef(null)
   const waitingForDriverRef = useRef(null)
+
+  // yha pr hm socket val send and recieve msg krennge
+  const { user } = useContext(UserDataContext);
+  const { socket } = useContext(SocketContext)
+
+  useEffect(() => {
+
+    // yha  ye user hm user context se lekr aa rhe h 
+    socket.emit("join", { userType: "user", userId: user._id })
+  }, [user]);
 
   const handlePickupChange = async (e) => {
     const inputValue = e.target.value;
