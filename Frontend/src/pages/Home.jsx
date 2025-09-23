@@ -26,6 +26,7 @@ const Home = () => {
   const [activeField, setActiveField] = useState(null)
   const [fare, setFare] = useState({})
   const [vehicleType, setVehicleType] = useState(null)
+  const [ride, setRide] = useState(null)
 
 
   const panelRef = useRef(null)
@@ -40,10 +41,18 @@ const Home = () => {
   const { socket } = useContext(SocketContext)
 
   useEffect(() => {
+  if (user && user._id) {
+    socket.emit("join", { userType: "user", userId: user._id });
+    console.log("join emit:", user._id);
+  }
+}, [user, socket]);
 
-    // yha  ye user hm user context se lekr aa rhe h 
-    socket.emit("join", { userType: "user", userId: user._id })
-  }, [user]);
+  socket.on('ride-confirmed', ride => {
+    setWaitingForDriver(true)
+    setVehicleFound(false)
+    setRide(ride)
+
+  })
 
   const handlePickupChange = async (e) => {
     const inputValue = e.target.value;
@@ -330,7 +339,7 @@ const Home = () => {
 
       </div>
 
-      <div ref={vehicleFoundRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white  py-6 px-3 pt-12'>
+      <div ref={vehicleFoundRef} className=' fixed w-full z-10 bottom-0 translate-y-full bg-white  py-6 px-3 pt-12'>
 
         <LookingForDriver
           pickup={pickup}
@@ -345,7 +354,12 @@ const Home = () => {
 
       <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0  bg-white  py-6 px-3 pt-12'>
 
-        <WaitingForDriver waitingForDriver={waitingForDriver} />
+        <WaitingForDriver
+          ride={ride}
+          setVehicleFound={setVehicleFound}
+          setWaitingForDriver={setWaitingForDriver}
+          waitingForDriver={waitingForDriver}
+        />
 
       </div>
 

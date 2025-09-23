@@ -10,7 +10,7 @@ import rideRouter from "./routers/ride.routers.js";
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173", // frontend ka origin
+  origin: "*", // frontend ka origin
   credentials: true
 }));
 
