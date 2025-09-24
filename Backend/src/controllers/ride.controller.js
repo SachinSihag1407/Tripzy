@@ -1,5 +1,5 @@
 import { validationResult } from "express-validator"
-import getFareService, { confirmRideService, createRideService } from "../services/ride.service.js"
+import getFareService, { confirmRideService, createRideService, endRideService, startRideService } from "../services/ride.service.js"
 import { getCaptainInRadiusService, getAddressCoordinatesService } from "../services/maps.service.js";
 import { get } from "mongoose";
 import { Captain } from "../models/captain.model.js";
@@ -152,8 +152,62 @@ const confirmRide = async (req, res) => {
 }
 
 
+const startRide = async (req, res) => {
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+    const { rideId, otp } = req.query;
+
+    try {
+        const ride = await startRideService({ rideId, otp, captain: req.captain });
+
+        sendMessageToSocketId(ride.user.socketId, {
+            event: 'ride-start',
+            data: ride
+        })
+
+        return res.status(200).json(ride);
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+
+}
+
+const endRide = async (req, res) => {
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() })
+    }
+
+    const { rideId } = req.body;
+
+    try {
+        const ride = await endRideService({ rideId, captain: req.captain });
+
+        sendMessageToSocketId(ride.user.socketId, {
+            event: 'ride-ended',
+            data: ride
+        })
+        
+
+        return res.status(200).json(ride);
+
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+}
+
+
 export {
     createRide,
     getFare,
-    confirmRide
+    confirmRide,
+    startRide,
+    endRide
+
 }

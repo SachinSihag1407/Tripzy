@@ -10,6 +10,7 @@ import LookingForDriver from '../components/LookingForDriver'
 import WaitingForDriver from '../components/WaitingForDriver'
 import { SocketContext } from '../context/SocketContext'
 import { UserDataContext } from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 
 const Home = () => {
@@ -36,6 +37,8 @@ const Home = () => {
   const vehicleFoundRef = useRef(null)
   const waitingForDriverRef = useRef(null)
 
+  const navigate = useNavigate()
+
   // yha pr hm socket val send and recieve msg krennge
   const { user } = useContext(UserDataContext);
   const { socket } = useContext(SocketContext)
@@ -47,10 +50,18 @@ const Home = () => {
     }
   }, [user]);
 
+
+  // ye h  jb koe new-ride hamre pas aayeggi to ye chize set ho jayegi
   socket.on('ride-confirmed', ride => {
     setWaitingForDriver(true)
     setVehicleFound(false)
     setRide(ride)
+
+  })
+
+  socket.on('ride-started', ride => {
+    setWaitingForDriver(false);
+    navigate('/riding', { state: { ride } })
 
   })
 
@@ -339,7 +350,7 @@ const Home = () => {
 
       </div>
 
-      <div ref={vehicleFoundRef} className=' fixed w-full z-10 bottom-0 translate-y-full bg-white  py-6 px-3 pt-12'>
+      <div ref={vehicleFoundRef} className=' fixed w-full z-10 bottom-0 translate-y-full transform bg-white  py-6 px-3 pt-12'>
 
         <LookingForDriver
           pickup={pickup}
