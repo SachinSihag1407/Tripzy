@@ -30,7 +30,7 @@ const UserLogin = () => {
             const data = response.data;
             // data se user ko le liya
             setUser(data.user)
-            localStorage.setItem('token', data.token)
+            localStorage.setItem('userToken', data.userToken)
             // now ab main page pr navigate kkr jao
             navigate('/home')
         }

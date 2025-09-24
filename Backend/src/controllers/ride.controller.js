@@ -76,19 +76,21 @@ const createRide = async (req, res) => {
         const pickupCoordinates = await getAddressCoordinatesService(pickup);
         console.log(pickupCoordinates);
 
-        const captainsInRadius = await getCaptainInRadiusService(pickupCoordinates.lat, pickupCoordinates.lng, 50);
+        const captainsInRadius = await getCaptainInRadiusService(pickupCoordinates.lat, pickupCoordinates.lng, 500);
         console.log(captainsInRadius);
 
         ride.otp = "";
 
         const rideWithUser = await Ride.findOne({ _id: ride._id }).populate('user');
-
+const activeCaptains = captainsInRadius.filter(c => c.status === 'active');
         // ✅ Single loop for socket only
-        captainsInRadius.forEach(captain => {
-            sendMessageToSocketId(captain.socketId, {
-                event: 'new-ride',
-                data: rideWithUser
-            });
+        captainsInRadius.forEach((captain) => {
+            if (captain.socketId) {
+                sendMessageToSocketId(captain.socketId, {
+                    event: 'new-ride',
+                    data: rideWithUser
+                });
+            }
         });
 
     } catch (err) {

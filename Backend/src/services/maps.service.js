@@ -125,10 +125,10 @@ export const getAutoCompleteSuggestionService = async (input) => {
 
 }
 
+const toRad = (val) => (val * Math.PI) / 180;
+
 export const getCaptainInRadiusService = async (lat, lng, radiusKm) => {
   const captains = await Captain.find();
-
-  const toRad = (val) => (val * Math.PI) / 180;
 
   const nearby = captains.filter((captain) => {
     if (!captain.location?.lat || !captain.location?.lng) return false;
@@ -136,12 +136,12 @@ export const getCaptainInRadiusService = async (lat, lng, radiusKm) => {
     const dLat = toRad(captain.location.lat - lat);
     const dLng = toRad(captain.location.lng - lng);
 
+    const lat1 = toRad(lat);
+    const lat2 = toRad(captain.location.lat);
+
     const a =
-      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-      Math.cos(toRad(lat)) *
-      Math.cos(toRad(captain.location.lat)) *
-      Math.sin(dLng / 2) *
-      Math.sin(dLng / 2);
+      Math.sin(dLat / 2) ** 2 +
+      Math.cos(lat1) * Math.cos(lat2) * Math.sin(dLng / 2) ** 2;
 
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
     const distance = 6371 * c; // Earth radius in km

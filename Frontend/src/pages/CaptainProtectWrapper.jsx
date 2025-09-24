@@ -5,13 +5,13 @@ import axios from 'axios'
 
 const CaptainProtectWrapper = ({ children }) => {
 
-    const token = localStorage.getItem('token')
+    const captainToken = localStorage.getItem('captainToken')
     const navigate = useNavigate()
     const { captain, setCaptain } = useContext(CaptainDataContext)
     const [isLoading, setIsLoading] = useState(true)
 
     useEffect(() => {
-        if (!token) {
+        if (!captainToken) {
             // to vapis navigate kr ddo captain-login
             navigate('/captain-login')
         }
@@ -19,7 +19,7 @@ const CaptainProtectWrapper = ({ children }) => {
         // now send the req to the backend yha se hm req kr rhe h authenrication k liye
         axios.get(`${import.meta.env.VITE_BASE_URL}/captains/profile`, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${captainToken}`
             }
         }).then((response) => {
             if (response.status == 200) {
@@ -31,11 +31,11 @@ const CaptainProtectWrapper = ({ children }) => {
         }).catch(err => {
             //to token ko remove kro
             console.log(err)
-            localStorage.removeItem('token')
+            localStorage.removeItem('captainToken')
             navigate('/captai-login')
         })
 
-    }, [token])
+    }, [captainToken])
 
     // jb tk user validate ho tb tk load ho ja
     if (isLoading) {

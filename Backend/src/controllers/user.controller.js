@@ -31,12 +31,13 @@ const registerUser = async (req, res, next) => {
     })
 
     // now user bn gya to token generate
-    const token = user.generateAuthToken();
+    const userToken = user.generateAuthToken();
 
 
     // now return the user and token 
 
-    res.status(201).json({ token, user });
+
+    res.status(201).json({ userToken, user });
 
 
 }
@@ -61,11 +62,11 @@ const loginUser = async (req, res, next) => {
     if (!isMatch) {
         return res.status(401).json({ message: "Invalid user Details" })
     }
-    const token = user.generateAuthToken();
+    const userToken = user.generateAuthToken();
 
-    res.cookie("token", token);
+    res.cookie("userToken", userToken);
 
-    res.status(200).json({ token, user })
+    res.status(200).json({ userToken, user })
 
 
 }
@@ -75,16 +76,16 @@ const getUserProfile = async (req, res, next) => {
     res.status(200).json(req.user);
 }
 
-const logoutUser = async(req,res,next) => {
+const logoutUser = async (req, res, next) => {
     res.clearCookie("token");
 
     // now token nikalo and balck list kr do  
-    const token = req.cookies.token || req.headers.authorization.split(' ')[1];
+    const userToken = req.cookies.userToken || req.headers.authorization.split(' ')[1];
 
     // ab isko black list krwa do 
-    await BlacklistToken.create({token});
+    await BlacklistToken.create({ token: userToken });
 
-    return res.status(200).json({message : "Logged Out"})
+    return res.status(200).json({ message: "Logged Out" })
 
 }
 

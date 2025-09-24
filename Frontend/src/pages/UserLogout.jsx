@@ -3,17 +3,17 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 const UserLogout = () => {
-    const token = localStorage.getItem('token')
+    const userToken = localStorage.getItem('userToken')
     const navigate = useNavigate()
 
     axios.get(`${import.meta.env.VITE_BASE_URL}/users/logout`, {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${userToken}`
         }
         
     }).then((Response) => {
         if (Response.status == 200) {
-            localStorage.removeItem('token')
+            localStorage.removeItem('userToken')
             navigate('/login')
         }
     })

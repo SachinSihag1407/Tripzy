@@ -57,7 +57,7 @@ const Home = () => {
   const handlePickupChange = async (e) => {
     const inputValue = e.target.value;
     const url = `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`;
-    const token = localStorage.getItem("token");
+    const userToken = localStorage.getItem("userToken");
 
     // console.log("Input ->", inputValue);
     // console.log("Calling URL:", url);
@@ -69,7 +69,7 @@ const Home = () => {
       const response = await axios.get(url, {
         params: { input: inputValue },
         headers: {
-          Authorization: token ? `Bearer ${token}` : ""
+          Authorization: userToken ? `Bearer ${userToken}` : ""
         }
       });
 
@@ -91,7 +91,7 @@ const Home = () => {
       const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
         params: { input: e.target.value },
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${localStorage.getItem('userToken')}`
         }
       })
       setDestinationSuggestions(response.data)
@@ -206,7 +206,7 @@ const Home = () => {
         destination
       },
       headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`
+        Authorization: `Bearer ${localStorage.getItem('userToken')}`
       }
     })
 
@@ -225,7 +225,7 @@ const Home = () => {
     },
       {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('token')}`
+          Authorization: `Bearer ${localStorage.getItem('userToken')}`
         }
 
       })

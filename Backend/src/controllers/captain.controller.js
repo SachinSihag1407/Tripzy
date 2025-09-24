@@ -31,12 +31,12 @@ const registerCaptain = async (req, res, next) => {
         plate: vehicle.plate,
         capacity: vehicle.capacity,
         vehicleType: vehicle.vehicleType,
-       
+
     });
 
-    const token = captain.generateAuthToken();
+    const captainToken = captain.generateAuthToken();
 
-    res.status(201).json({ token, captain });
+    res.status(201).json({ captainToken, captain });
 
 }
 
@@ -62,11 +62,11 @@ const loginCaptain = async (req, res, next) => {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const token = captain.generateAuthToken();
+    const captainToken = captain.generateAuthToken();
 
-    res.cookie('token', token);
+    res.cookie('captainToken', captainToken);
 
-    res.status(200).json({ token, captain });
+    res.status(200).json({ captainToken, captain });
 }
 
 const getCaptainProfile = async (req, res, next) => {
@@ -74,11 +74,11 @@ const getCaptainProfile = async (req, res, next) => {
 }
 
 const logoutCaptain = async (req, res, next) => {
-    const token = req.cookies.token || req.headers.authorization?.split(' ')[1];
+    const captainToken = req.cookies.captainToken || req.headers.authorization?.split(' ')[1];
 
-    await BlacklistToken.create({ token });
+    await BlacklistToken.create({ token: captainToken });
 
-    res.clearCookie('token');
+    res.clearCookie('captainToken');
 
     res.status(200).json({ message: 'Logout successfully' });
 }
