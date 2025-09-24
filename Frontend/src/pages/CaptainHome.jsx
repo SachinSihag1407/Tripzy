@@ -53,10 +53,10 @@ const CaptainHome = () => {
   }, [])
 
   socket.on("new-ride", (data) => {
-  console.log("🚖 New ride received:", data);
-  setRide(data);
-  setRidePopUpPanel(true);
-});
+    console.log("🚖 New ride received:", data);
+    setRide(data);
+    setRidePopUpPanel(true);
+  });
 
 
   async function confirmRide() {

@@ -82,7 +82,7 @@ const createRide = async (req, res) => {
         ride.otp = "";
 
         const rideWithUser = await Ride.findOne({ _id: ride._id }).populate('user');
-const activeCaptains = captainsInRadius.filter(c => c.status === 'active');
+        const activeCaptains = captainsInRadius.filter(c => c.status === 'active');
         // ✅ Single loop for socket only
         captainsInRadius.forEach((captain) => {
             if (captain.socketId) {
