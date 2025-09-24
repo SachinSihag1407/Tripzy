@@ -1,5 +1,6 @@
 import { Captain } from "../models/captain.model.js";
 
+
 export const createCaptain = async ({
     firstName, lastName, email, password, color, plate, capacity, vehicleType
 }) => {
@@ -18,7 +19,8 @@ export const createCaptain = async ({
             plate,
             capacity,
             vehicleType
-        }
+        },
+        
     })
 
     return captain;

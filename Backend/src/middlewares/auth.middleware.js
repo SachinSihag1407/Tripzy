@@ -22,14 +22,20 @@ export const authUser = async (req, res, next) => {
     // agr token valid h to user le lo qki token me id aati h 
     try {
         const decoded = Jwt.verify(token, process.env.JWT_SECRET);
-
+        console.log("Decoded:", decoded);
         const user = await User.findById(decoded._id)
 
-        // now set the user in req 
-        req.user = user;
+        // // now set the user in req 
+        // req.user = user;
 
-        // terminatte 
+        // // terminatte 
+        // return next();
+
+        // after: const user = await User.findById(decoded._id)
+
+        req.user = user;
         return next();
+
 
     } catch (error) {
         return res.status(401).json({ message: "Unauthorized" })
@@ -45,7 +51,7 @@ export const authCaptain = async (req, res, next) => {
     if (!token) {
         return res.status(401).json({ message: "Unauthorized" })
     }
-    
+
     const isBlackListed = await BlacklistToken.findOne({ token: token });
 
     if (isBlackListed) {
@@ -55,17 +61,16 @@ export const authCaptain = async (req, res, next) => {
     // agr token valid h to user le lo qki token me id aati h 
     try {
         const decoded = Jwt.verify(token, process.env.JWT_SECRET);
+        console.log("Decoded Captain:", decoded);
 
-        const captain = await Captain.findById(decoded._id)
-
-        // now set the user in req 
+        const captain = await Captain.findById(decoded._id);
         req.captain = captain;
 
-        // terminatte 
         return next();
-
     } catch (error) {
+        console.log(error);
         return res.status(401).json({ message: "Unauthorized" })
     }
+
 
 }

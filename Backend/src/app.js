@@ -4,7 +4,7 @@ import userRouter from "./routers/user.route.js";
 import cookieParser from "cookie-parser"
 import captainRouter from "./routers/captain.route.js";
 import mapRouter from "./routers/maps.routes.js";
-import rideRouter from "./routers/ride.routers.js";
+import rideRouter from "./routers/ride.route.js";
 
 
 const app = express();

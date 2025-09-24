@@ -125,17 +125,30 @@ export const getAutoCompleteSuggestionService = async (input) => {
 
 }
 
-export const getCaptainInRadiusService = async (lat, lng, radius) => {
+export const getCaptainInRadiusService = async (lat, lng, radiusKm) => {
+  const captains = await Captain.find();
 
-  const captains = await Captain.find({
+  const toRad = (val) => (val * Math.PI) / 180;
 
-    // radius in km 
-    location: {
-      $geoWithin: {
-        $centerSphere: [[lng, lat], radius /6371]
-      }
-    }
+  const nearby = captains.filter((captain) => {
+    if (!captain.location?.lat || !captain.location?.lng) return false;
+
+    const dLat = toRad(captain.location.lat - lat);
+    const dLng = toRad(captain.location.lng - lng);
+
+    const a =
+      Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+      Math.cos(toRad(lat)) *
+      Math.cos(toRad(captain.location.lat)) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
+
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    const distance = 6371 * c; // Earth radius in km
+
+    return distance <= radiusKm;
   });
 
-  return captains;
-}
+  return nearby;
+};
+

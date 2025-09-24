@@ -9,7 +9,7 @@ import ConfirmRide from '../components/ConfirmRide'
 import LookingForDriver from '../components/LookingForDriver'
 import WaitingForDriver from '../components/WaitingForDriver'
 import { SocketContext } from '../context/SocketContext'
-import { UserDataContext } from '../context/userContext'
+import { UserDataContext } from '../context/UserContext'
 
 
 const Home = () => {
@@ -41,11 +41,11 @@ const Home = () => {
   const { socket } = useContext(SocketContext)
 
   useEffect(() => {
-  if (user && user._id) {
-    socket.emit("join", { userType: "user", userId: user._id });
-    console.log("join emit:", user._id);
-  }
-}, [user, socket]);
+    if (user && user._id) {
+      socket.emit("join", { userType: "user", userId: user._id });
+      // console.log("join emit:", user._id);
+    }
+  }, [user]);
 
   socket.on('ride-confirmed', ride => {
     setWaitingForDriver(true)
