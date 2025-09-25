@@ -9,8 +9,9 @@ import ConfirmRide from '../components/ConfirmRide'
 import LookingForDriver from '../components/LookingForDriver'
 import WaitingForDriver from '../components/WaitingForDriver'
 import { SocketContext } from '../context/SocketContext'
-import { UserDataContext } from '../context/UserContext'
+import { UserDataContext } from '../context/UserContext.jsx'
 import { useNavigate } from 'react-router-dom'
+import LiveTracking from '../components/LiveTracking'
 
 
 const Home = () => {
@@ -247,21 +248,20 @@ const Home = () => {
 
 
   return (
-    <div className='h-screen relative overflow-hidden'>
+    <div className='h-screen relative '>
 
-      <img className='w-16 absolute left-5 top-5' src='https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png' alt='' />
+      {/* <img className='w-16  left-35 top-5 z-50' src='https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png' alt='' /> */}
 
-      <div onClick={() => {
-        setVehiclePanelOpen(false)
-      }}
-        className='h-screen w-screen '>
-        <img className='h-full w-full object-cover' src='https://imgs.search.brave.com/d0X_YC5CTyk2e7Z2I4gVmfhZ5OBQ7iXVkKPJLoa8XqM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9naXRo/dWIuY29tL01pbmRv/cmtzT3BlblNvdXJj/ZS9VYmVyLUNhci1B/bmltYXRpb24tQW5k/cm9pZC9yYXcvbWFz/dGVyL2Fzc2V0cy9o/b3ctdG8tYWRkLXVi/ZXItY2FyLWFuaW1h/dGlvbi1pbi1hbmRy/b2lkLWFwcC1naWYu/Z2lm.gif' alt='' />
-
+      <div className='  absolute inset-0 z-0 '>
+        <LiveTracking
+          
+          className={panelOpen ? 'pointer-events-auto' : 'pointer-events-none'}
+        />
       </div>
 
-      <div className=' flex flex-col justify-end absolute h-screen top-0 w-full'>
+      <div className=' h-screen flex flex-col justify-end absolute  top-0 w-full pointer-events-auto '>
 
-        <div className='h-[30%] p-6 bg-white relative '>
+        <div className='h-[30%] p-6 bg-white relative pointer-events-auto  '>
 
           <h5 ref={panelCloseRef}
             onClick={() => {
@@ -285,7 +285,7 @@ const Home = () => {
               }}
               value={pickup}
               onChange={handlePickupChange}
-              className='bg-[#eee] px-12 py-2 text-base rounded-lg w-full mt-5 '
+              className='bg-[#eee] px-12 py-2 text-base rounded-lg w-full mt-4 '
               type='text'
               placeholder='Add a pick-up location'
             />
