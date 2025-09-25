@@ -20,7 +20,7 @@ app.use(express.json())
 app.use(cookieParser())
 
 
-app.get('/',(req,res)=>{
+app.get('/status',(req,res)=>{
     res.send("Hello World!!")
 })
 
