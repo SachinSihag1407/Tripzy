@@ -17,7 +17,7 @@ const CaptainProtectWrapper = ({ children }) => {
         }
 
         // now send the req to the backend yha se hm req kr rhe h authenrication k liye
-        axios.get(`${import.meta.env.VITE_BASE_URL}/api/captains/profile`, {
+        axiosInstance.get(`/captains/profile`, {
             headers: {
                 Authorization: `Bearer ${captainToken}`
             }
