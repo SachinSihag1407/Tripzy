@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "http://mc-bc-sachu.ap-southeast-2.elasticbeanstalk.com"
+      "destination": "http://mc-bc-sachu.ap-southeast-2.elasticbeanstalk.com/"
     },
     {
       "source": "/(.*)",
