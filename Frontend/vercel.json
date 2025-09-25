@@ -1,8 +1,8 @@
 {
   "rewrites": [
     {
-      "source": "/api/(.*)",
-      "destination": "http://ligntning-chatapp.ap-south-1.elasticbeanstalk.com/api/$1"
+      "source": "/(.*)",
+      "destination": "http://mc-bc-sachu.ap-southeast-2.elasticbeanstalk.com"
     },
     {
       "source": "/(.*)",
