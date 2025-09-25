@@ -1,4 +1,4 @@
-import axios form 'axios'
+import axios from 'axios'
 
 base=import.meta.env.VITE_BASE_URL||"";
 
