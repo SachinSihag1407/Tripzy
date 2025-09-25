@@ -6,7 +6,7 @@ const UserLogout = () => {
     const userToken = localStorage.getItem('userToken')
     const navigate = useNavigate()
 
-    axios.get(`${import.meta.env.VITE_BASE_URL}/users/logout`, {
+    axios.get(`${import.meta.env.VITE_BASE_URL}/api/users/logout`, {
         headers: {
             Authorization: `Bearer ${userToken}`
         }
