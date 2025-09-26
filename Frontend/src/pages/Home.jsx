@@ -78,7 +78,7 @@ const Home = () => {
     setPickup(inputValue);
 
     try {
-      const response = await axios.get(url, {
+      const response = await axiosInstance.get(url, {
         params: { input: inputValue },
         headers: {
           Authorization: userToken ? `Bearer ${userToken}` : ""
@@ -100,7 +100,7 @@ const Home = () => {
   const handleDestinationChange = async (e) => {
     setDestination(e.target.value)
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`, {
+      const response = await axiosInstance.get(`/maps/get-suggestions`, {
         params: { input: e.target.value },
         headers: {
           Authorization: `Bearer ${localStorage.getItem('userToken')}`
@@ -212,7 +212,7 @@ const Home = () => {
     setPanelOpen(false);
     setVehiclePanelOpen(true)
     //  console.log("Token ->", localStorage.getItem("token"));
-    const response = await axios.get(`${import.meta.env.VITE_BASE_URL}/rides/get-fare`, {
+    const response = await axiosInstance.get(`/rides/get-fare`, {
       params: {
         pickup,
         destination
@@ -230,7 +230,7 @@ const Home = () => {
 
   async function createRide() {
 
-    const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/rides/create`, {
+    const response = await axiosInstance.post(`/rides/create`, {
       pickup,
       destination,
       vehicleType
