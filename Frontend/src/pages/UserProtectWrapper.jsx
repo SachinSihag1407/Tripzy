@@ -19,7 +19,7 @@ const UserProtectWrapper = ({ children }) => {
         }
 
         // now check for the validatity
-        axiosInstance.get(`/users/profile`, {
+        axios.get(`${import.meta.env.VITE_BASE_URL}/users/profile`, {
             headers: {
                 Authorization: `Bearer ${userToken}`
             }

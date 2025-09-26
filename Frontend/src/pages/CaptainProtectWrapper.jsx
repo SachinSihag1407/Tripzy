@@ -17,7 +17,7 @@ const CaptainProtectWrapper = ({ children }) => {
         }
 
         // now send the req to the backend yha se hm req kr rhe h authenrication k liye
-        axiosInstance.get(`/captains/profile`, {
+        axios.get(`${import.meta.env.VITE_BASE_URL}/captains/profile`, {
             headers: {
                 Authorization: `Bearer ${captainToken}`
             }
@@ -25,7 +25,7 @@ const CaptainProtectWrapper = ({ children }) => {
             if (response.status == 200) {
                 setCaptain(response.data.captain)
                 // now navigate to the captain login
-                
+
                 setIsLoading(false)
             }
         }).catch(err => {

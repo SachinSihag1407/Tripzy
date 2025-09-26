@@ -8,7 +8,7 @@ const CaptainLogout = () => {
     const navigate = useNavigate()
 
 
-    axiosInstance.get(`/captains/logout`, {
+    axios.get(`${import.meta.env.VITE_API_URL}/captains/logout`, {
         headers: {
             Authorization: `Bearer ${captainToken}`
         }
