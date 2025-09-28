@@ -146,36 +146,36 @@ const Home = () => {
     }
   }, [panelOpen])
 
-  useGSAP(function () {
-    if (vehiclePanelOpen) {
-      gsap.to(vehiclePanelRef.current, {
-        transform: 'translateY(0)'
-      })
+  // useGSAP(function () {
+  //   if (vehiclePanelOpen) {
+  //     gsap.to(vehiclePanelRef.current, {
+  //       transform: 'translateY(0)'
+  //     })
 
-    } else {
+  //   } else {
 
-      gsap.to(vehiclePanelRef.current, {
-        transform: 'translateY(100%)'
-      })
-    }
+  //     gsap.to(vehiclePanelRef.current, {
+  //       transform: 'translateY(100%)'
+  //     })
+  //   }
 
-  }, [vehiclePanelOpen])
+  // }, [vehiclePanelOpen])
 
 
-  useGSAP(function () {
-    if (confirmRidePanel) {
-      gsap.to(confirmRidePanelRef.current, {
-        transform: 'translateY(0)'
-      })
+  // useGSAP(function () {
+  //   if (confirmRidePanel) {
+  //     gsap.to(confirmRidePanelRef.current, {
+  //       transform: 'translateY(0)'
+  //     })
 
-    } else {
+  //   } else {
 
-      gsap.to(confirmRidePanelRef.current, {
-        transform: 'translateY(100%)'
-      })
-    }
+  //     gsap.to(confirmRidePanelRef.current, {
+  //       transform: 'translateY(100%)'
+  //     })
+  //   }
 
-  }, [confirmRidePanel])
+  // }, [confirmRidePanel])
 
   // useGSAP(function () {
   //   if (vehicleFound) {
@@ -192,20 +192,20 @@ const Home = () => {
 
   // }, [vehicleFound])
 
-  useGSAP(function () {
-    if (waitingForDriver) {
-      gsap.to(waitingForDriverRef.current, {
-        transform: 'translateY(0)'
-      })
+  // useGSAP(function () {
+  //   if (waitingForDriver) {
+  //     gsap.to(waitingForDriverRef.current, {
+  //       transform: 'translateY(0)'
+  //     })
 
-    } else {
+  //   } else {
 
-      gsap.to(waitingForDriverRef.current, {
-        transform: 'translateY(100%)'
-      })
-    }
+  //     gsap.to(waitingForDriverRef.current, {
+  //       transform: 'translateY(100%)'
+  //     })
+  //   }
 
-  }, [waitingForDriver])
+  // }, [waitingForDriver])
 
 
   async function findTrip() {
@@ -325,7 +325,9 @@ const Home = () => {
 
       </div>
 
-      <div ref={vehiclePanelRef} className='fixed  w-full z-10 bottom-0 translate-y-full bg-white  py-10 px-3 pt-12'>
+      <div ref={vehiclePanelRef}
+        className={`fixed w-full z-10 bottom-0 bg-white py-10 px-3 pt-12 
+          transition-transform duration-300 ${vehiclePanelOpen ? 'translate-y-0' : 'translate-y-full'}`}      >
 
         <VehiclePanel
           selectVehicle={setVehicleType}
@@ -336,7 +338,9 @@ const Home = () => {
 
       </div>
 
-      <div ref={confirmRidePanelRef} className='fixed w-full z-10 bottom-0 translate-y-full bg-white  py-6 px-3 pt-12'>
+      <div ref={confirmRidePanelRef}
+        className={`fixed w-full z-10 bottom-0 bg-white py-6 px-3 pt-12 
+          transition-transform duration-300 ${confirmRidePanel ? 'translate-y-0' : 'translate-y-full'}`}      >
 
         <ConfirmRide
           pickup={pickup}
@@ -365,7 +369,10 @@ const Home = () => {
 
       </div>
 
-      <div ref={waitingForDriverRef} className='fixed w-full z-10 bottom-0  bg-white  py-6 px-3 pt-12'>
+      <div ref={waitingForDriverRef}
+        className={`fixed w-full z-10 bottom-0 bg-white py-6 px-3 pt-12 
+          transition-transform duration-300 ${waitingForDriver ? 'translate-y-0' : 'translate-y-full'}`}
+      >
 
         <WaitingForDriver
           ride={ride}
