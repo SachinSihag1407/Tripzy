@@ -255,7 +255,7 @@ const Home = () => {
       <div className='  absolute inset-0 z-0 '>
         <LiveTracking
 
-          className={panelOpen ? 'pointer-events-auto' : 'pointer-events-none'}
+          className='pointer-events-auto'
         />
       </div>
 
