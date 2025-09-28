@@ -177,20 +177,20 @@ const Home = () => {
 
   }, [confirmRidePanel])
 
-  useGSAP(function () {
-    if (vehicleFound) {
-      gsap.to(vehicleFoundRef.current, {
-        transform: 'translateY(0)'
-      })
+  // useGSAP(function () {
+  //   if (vehicleFound) {
+  //     gsap.to(vehicleFoundRef.current, {
+  //       transform: 'translateY(0)'
+  //     })
 
-    } else {
+  //   } else {
 
-      gsap.to(vehicleFoundRef.current, {
-        transform: 'translateY(100%)'
-      })
-    }
+  //     gsap.to(vehicleFoundRef.current, {
+  //       transform: 'translateY(100%)'
+  //     })
+  //   }
 
-  }, [vehicleFound])
+  // }, [vehicleFound])
 
   useGSAP(function () {
     if (waitingForDriver) {
@@ -350,7 +350,9 @@ const Home = () => {
 
       </div>
 
-      <div ref={vehicleFoundRef} className=' fixed w-full z-10 bottom-0 translate-y-full transform bg-white  py-6 px-3 pt-12'>
+      <div ref={vehicleFoundRef}
+        className={`fixed w-full z-10 bottom-0 bg-white py-6 px-3 pt-12 ${vehicleFound ? 'translate-y-0' : 'translate-y-full'
+          } transition-transform duration-300`}      >
 
         <LookingForDriver
           pickup={pickup}
