@@ -30,6 +30,8 @@ const registerUser = async (req, res, next) => {
         password: hashedPassword
     })
 
+    // console.log("useeeerrrr",user);
+
     // now user bn gya to token generate
     const userToken = user.generateAuthToken();
 
