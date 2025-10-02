@@ -24,10 +24,6 @@
 - 🔢 *OTP Verification* – OTP required to start a ride for security.  
 - 🔔 *Ride Notifications* – Captains notified of incoming ride requests.  
 - 🗺 *Interactive Maps* – Leaflet + OpenStreetMap for geolocation and tracking.  
-- 📱 *Responsive UI* – Optimized for mobile and desktop use.  
-- 🎨 *Clean Design* – Simple, user-friendly booking interface.  
-- 🚀 *Scalable Architecture* – Separate frontend & backend, deployable independently.  
-
 ---
 
 ## 🛠 Tech Stack
@@ -36,10 +32,11 @@
 |---------------------|--------------|
 | *Language*        | ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) |
 | *Frontend*        | ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB) ![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=for-the-badge&logo=leaflet&logoColor=white) |
+| *Animations & Icons* | ![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=for-the-badge&logo=greensock&logoColor=black) ![Remixicon](https://img.shields.io/badge/Remixicon-000000?style=for-the-badge&logo=remixicon&logoColor=white) |
 | *Backend*         | ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white) ![Express.js](https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white) |
 | *Database*        | ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white) |
 | *Real-Time*       | ![Socket.io](https://img.shields.io/badge/Socket.io-010101?style=for-the-badge&logo=socket.io&logoColor=white) |
-| *Deployment*      | ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) |
+| *Deployment*      | ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=black) ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white) |
 | *Maps & Routing*  | ![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-7EBC6F?style=for-the-badge&logo=openstreetmap&logoColor=white) ![OLA API](https://img.shields.io/badge/OLA_API-000000?style=for-the-badge&logo=uber&logoColor=white) |
 ---
 
@@ -52,13 +49,13 @@
   </tr>
   <tr>
     <td align="center">
-      <img src="LoginPage.png" alt="Login Page" height = "200" width="500"/>
+      <img src="user_captain_login.png" alt="Login Page" height = "200" width="500"/>
     </td>
     <td align="center">
-      <img src="ChatPage.png" alt="Chat Page"  height = "200" width="500"/>
+      <img src="confirm_ride_otp.png" alt="Chat Page"  height = "200" width="500"/>
     </td>
     <td align="center">
-      <img src="UpdatePage.png" alt="Update Page" width="300"/>
+      <img src="finish_ride.png" alt="Update Page" width="300"/>
     </td>
   </tr>
 </table>
@@ -67,7 +64,7 @@
 ## 📂 Project Structure
 
 ```text
-ProjectRoot/
+Tripzy/
 ├── Backend/                     # Backend server
 │   ├── src/
 │   │   ├── controllers/         # Request handlers (business logic)
@@ -109,7 +106,8 @@ ProjectRoot/
 
 ### 1. Clone repo
 ```bash
-git clone <your-repo-url> && cd Tripzy
+git clone https://github.com/SachinSihag1407/Tripzy.git
+cd Tripzy
 ```
 
 ### 2. Backend Setup
@@ -476,6 +474,6 @@ Retrieves the fare estimate for a ride between the provided pickup and destinati
 
 ---
 
-## 📜 License
+## 🙌 Acknowledgments
+👨‍💻 [**Sachin Sihag**](https://github.com/SachinSihag1407)  
 
-This project is licensed under the **MIT License**.
