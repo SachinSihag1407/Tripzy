@@ -16,6 +16,47 @@ const Riding = () => {
         navigate('/home')
     })
 
+const handlePayment = () => {
+
+        if (!window.Razorpay) {
+            alert("Razorpay SDK failed to load");
+            return;
+        }
+
+        const options = {
+            key: "rzp_test_RpPU9ohfAPagEv",   // Razorpay Key
+            amount: ride?.fare * 100,  // rupees ➜ paise
+            currency: "INR",
+            name: "Tripzy",
+            description: "Ride Payment",
+            image: "https://yourlogo.com/logo.png",
+
+            handler: function (response) {
+                console.log("Payment Success ✅", response);
+                alert("Payment Successful 🎉");
+
+                // optional – inform backend
+                // axios.post("/verify-payment", response)
+            },
+
+            prefill: {
+                name: ride?.user?.fullName?.firstName || "Customer",
+                email: "demo@gmail.com",
+                contact: "9999999999"
+            },
+
+            theme: {
+                color: "#22c55e"
+            }
+        };
+
+        const rzp = new window.Razorpay(options);
+        rzp.open();
+    };
+
+
+
+    
 
     return (
         <div className='h-screen flex flex-col'>
@@ -67,7 +108,7 @@ const Riding = () => {
                 </div>
 
 
-                <button className='w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg'>Make a Payment</button>
+                <button onClick={handlePayment} className='w-full mt-5 bg-green-600 text-white font-semibold p-2 rounded-lg'>Make a Payment</button>
             </div>
         </div>
     )
